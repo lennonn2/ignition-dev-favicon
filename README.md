@@ -1,0 +1,1 @@
+# ignition-dev-favicon
