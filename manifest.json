@@ -5,11 +5,16 @@
   "manifest_version": 3,
   "content_scripts": [
     {
-      "matches": ["*://127.0.0.1/*"],
+      "matches": ["*://localhost/*"],
       "js": ["popup.js"]
     }
   ],
-  "web_accessible_resources": ["favicon-purple.ico", "favicon-green.ico"],
+  "web_accessible_resources": [
+    {
+      "resources": ["favicon-purple.ico", "favicon-green.ico"],
+      "matches": ["*://localhost/*"]
+    }
+  ],
   "icons": {
     "16": "icon16.png",
     "32": "icon32.png",

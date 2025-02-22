@@ -1,9 +1,13 @@
 function checkEnv() {
   var curURL, imgURL;
 
-  if (window.location.href.match(/localhost:3000\/console(?:\/.*)?(?:\?.*)?$/)) {
+  if (
+    window.location.href.match(/localhost:3000\/console(?:\/.*)?(?:\?.*)?$/)
+  ) {
     curURL = "mission-control";
-  } else if (window.location.href.match(/localhost:3000\/graphiql(?:\/.*)?(?:\?.*)?$/)) {
+  } else if (
+    window.location.href.match(/localhost:3000\/graphiql(?:\/.*)?(?:\?.*)?$/)
+  ) {
     curURL = "graphiql";
   }
 
@@ -13,10 +17,8 @@ function checkEnv() {
     function removeOldFavicons() {
       var shortcut = document.querySelector('link[rel="shortcut icon"]');
       var favs = document.querySelectorAll('link[rel="icon"]');
-      shortcut.remove();
-      for (var i = 0; i < favs.length; i++) {
-        favs[i].remove();
-      }
+      if (shortcut) shortcut.remove();
+      favs.forEach((fav) => fav.remove());
     }
 
     function changeFavicon(src) {
@@ -29,14 +31,15 @@ function checkEnv() {
       document.head.appendChild(link);
     }
 
-    var cE = chrome.extension;
+    // Use chrome.runtime.getURL() in Manifest V3
+    var cR = chrome.runtime;
 
     switch (curURL) {
       case "mission-control":
-        imgURL = cE.getURL("icon-green.ico");
+        imgURL = cR.getURL("favicon-green.ico");
         break;
       case "graphiql":
-        imgURL = cE.getURL("icon-purple.ico");
+        imgURL = cR.getURL("favicon-purple.ico");
         break;
     }
 
